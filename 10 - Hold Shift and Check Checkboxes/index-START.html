@@ -99,6 +99,25 @@
   </div>
 
 <script>
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+let prev_checked_index = 0;
+
+window.onload = function() {
+  const items = $$('input');
+  items.forEach(function(item, _i) {
+    item.addEventListener('click', function(e) {
+      if (e.shiftKey && this.checked) {
+        for (let i = prev_checked_index; i != _i; prev_checked_index < _i ? i++ : i--) {
+          items[i].checked = true;
+        }
+      }
+
+      prev_checked_index = _i;
+    });
+  });
+};
 </script>
 </body>
 </html>
